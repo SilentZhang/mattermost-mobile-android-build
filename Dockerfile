@@ -3,7 +3,8 @@ FROM npetrovsky/docker-android-sdk-ndk
 MAINTAINER zhangchang<zhangchang1979@gmail.com>
 
 RUN apt-get update && \
-    apt-get install -y make autoconf automake build-essential python-dev libtool pkg-config libssl-dev g++ zlib1g-dev 
+    apt-get install -y make autoconf automake build-essential python-dev libtool pkg-config libssl-dev g++ zlib1g-dev vim && \
+
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash && \
     export NVM_DIR="$HOME/.nvm" && \
