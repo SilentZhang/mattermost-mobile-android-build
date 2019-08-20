@@ -27,6 +27,14 @@ RUN apt-get install -y ruby-full && \
     gem install nokogiri && \
     gem install fastlane -NV
 
-RUN git clone https://github.com/mattermost/mattermost-mobile.git && \
-    cd mattermost-mobile/fastlane && \
+RUN cd /tmp && \
+    wget https://raw.githubusercontent.com/mattermost/mattermost-mobile/master/fastlane/Gemfile -q && \
+    wget https://raw.githubusercontent.com/mattermost/mattermost-mobile/master/fastlane/Gemfile.lock -q && \
     bundle install
+
+RUN /usr/lib/jvm/java-8-openjdk-amd64/bin/keytool  -genkey -v -keystore ~/tci-mattermost.keystore -alias tci-mattermost -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=tci,OU=TCI,O=Dev,L=Tianjin,S=Tianjin,C=CN" -noprompt -storepass 123456 -keypass 123456 && \
+    /usr/lib/jvm/java-8-openjdk-amd64/bin/keytool -importkeystore -srckeystore ~/tci-mattermost.keystore -destkeystore ~/tci-mattermost.keystore -deststoretype pkcs12 && \
+    mkdir ~/.gradle && \
+    echo "MATTERMOST_RELEASE_STORE_FILE=~/tci-mattermost.keystore" >> ~/.gradle/gradle.properties && \
+    echo "MATTERMOST_RELEASE_KEY_ALIAS=~/tci-mattermost.keystore" >> ~/.gradle/gradle.properties && \
+    echo "MATTERMOST_RELEASE_PASSWORD=123456" >> ~/.gradle/gradle.properties
