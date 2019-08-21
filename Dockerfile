@@ -37,6 +37,6 @@ RUN /usr/lib/jvm/java-8-openjdk-amd64/bin/keytool  -genkey -v -keystore ~/tci-ma
     /usr/lib/jvm/java-8-openjdk-amd64/bin/keytool -importkeystore -srckeystore ~/tci-mattermost.keystore -destkeystore ~/tci-mattermost.keystore -deststoretype pkcs12 && \
     mkdir ~/.gradle && \
     echo "MATTERMOST_RELEASE_STORE_FILE=/root/tci-mattermost.keystore" >> ~/.gradle/gradle.properties && \
-    echo "MATTERMOST_RELEASE_KEY_ALIAS=tci-mattermost.keystore" >> ~/.gradle/gradle.properties && \
+    echo "MATTERMOST_RELEASE_KEY_ALIAS=tci-mattermost" >> ~/.gradle/gradle.properties && \
     echo "MATTERMOST_RELEASE_PASSWORD=123456" >> ~/.gradle/gradle.properties
 
