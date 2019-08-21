@@ -40,8 +40,9 @@ RUN /usr/lib/jvm/java-8-openjdk-amd64/bin/keytool  -genkey -v -keystore ~/tci-ma
     echo "MATTERMOST_RELEASE_KEY_ALIAS=~/tci-mattermost.keystore" >> ~/.gradle/gradle.properties && \
     echo "MATTERMOST_RELEASE_PASSWORD=123456" >> ~/.gradle/gradle.properties
     
-RUN echo 999999 | tee -a /proc/sys/fs/inotify/max_user_watches && \
-    echo 999999 | tee -a /proc/sys/fs/inotify/max_queued_events && \
-    echo 999999 | tee -a /proc/sys/fs/inotify/max_user_instances && \
+#RUN echo 999999 | tee -a /proc/sys/fs/inotify/max_user_watches && \
+#    echo 999999 | tee -a /proc/sys/fs/inotify/max_queued_events && \
+#    echo 999999 | tee -a /proc/sys/fs/inotify/max_user_instances && \
+RUN echo "fs.inotify.max_user_watches = 999999" >> /etc/sysctl.conf && \
     watchman shutdown-server && \
     sysctl -p
