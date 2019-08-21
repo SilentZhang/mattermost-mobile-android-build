@@ -36,7 +36,7 @@ RUN cd /tmp && \
 RUN /usr/lib/jvm/java-8-openjdk-amd64/bin/keytool  -genkey -v -keystore ~/tci-mattermost.keystore -alias tci-mattermost -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=tci,OU=TCI,O=Dev,L=Tianjin,S=Tianjin,C=CN" -noprompt -storepass 123456 -keypass 123456 && \
     /usr/lib/jvm/java-8-openjdk-amd64/bin/keytool -importkeystore -srckeystore ~/tci-mattermost.keystore -destkeystore ~/tci-mattermost.keystore -deststoretype pkcs12 && \
     mkdir ~/.gradle && \
-    echo "MATTERMOST_RELEASE_STORE_FILE=~/tci-mattermost.keystore" >> ~/.gradle/gradle.properties && \
-    echo "MATTERMOST_RELEASE_KEY_ALIAS=~/tci-mattermost.keystore" >> ~/.gradle/gradle.properties && \
+    echo "MATTERMOST_RELEASE_STORE_FILE=/root/tci-mattermost.keystore" >> ~/.gradle/gradle.properties && \
+    echo "MATTERMOST_RELEASE_KEY_ALIAS=tci-mattermost.keystore" >> ~/.gradle/gradle.properties && \
     echo "MATTERMOST_RELEASE_PASSWORD=123456" >> ~/.gradle/gradle.properties
 
