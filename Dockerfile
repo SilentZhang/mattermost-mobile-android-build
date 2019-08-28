@@ -39,7 +39,3 @@ RUN /usr/lib/jvm/java-8-openjdk-amd64/bin/keytool  -genkey -v -keystore ~/tci-ma
     echo "MATTERMOST_RELEASE_STORE_FILE=/root/tci-mattermost.keystore" >> ~/.gradle/gradle.properties && \
     echo "MATTERMOST_RELEASE_KEY_ALIAS=tci-mattermost" >> ~/.gradle/gradle.properties && \
     echo "MATTERMOST_RELEASE_PASSWORD=123456" >> ~/.gradle/gradle.properties
-
-RUN curl -s "https://get.sdkman.io" | bash && \
-    source "/root/.sdkman/bin/sdkman-init.sh" && \
-    sdk install gradle 5.2.1
