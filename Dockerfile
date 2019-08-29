@@ -39,3 +39,9 @@ RUN /usr/lib/jvm/java-8-openjdk-amd64/bin/keytool  -genkey -v -keystore ~/tci-ma
     echo "MATTERMOST_RELEASE_STORE_FILE=/root/tci-mattermost.keystore" >> ~/.gradle/gradle.properties && \
     echo "MATTERMOST_RELEASE_KEY_ALIAS=tci-mattermost" >> ~/.gradle/gradle.properties && \
     echo "MATTERMOST_RELEASE_PASSWORD=123456" >> ~/.gradle/gradle.properties
+
+RUN apt-get update && \
+    apt-get install -y locales && \
+    rm -rf /var/lib/apt/lists/* && \
+	localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+ENV LANG en_US.UTF-8
