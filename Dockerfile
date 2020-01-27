@@ -24,7 +24,7 @@ RUN git clone https://github.com/facebook/watchman.git && \
     make install && \
     cd
 
-RUN apt-get install -y ruby-full=2.4.0 && \
+RUN apt-get install -y ruby-full  && \
     gem install nokogiri && \
     gem install fastlane -NV
 
