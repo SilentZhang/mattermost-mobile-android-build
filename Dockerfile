@@ -12,7 +12,7 @@ ENV ANDROID_HOME=/opt/android-sdk-linux
 ENV PATH ${PATH}:${ANDROID_HOME}/platform-tools/:${ANDROID_NDK_HOME}:${ANDROID_HOME}/ndk-bundle:${ANDROID_HOME}/tools/bin/
 
 RUN apt-get update && \
-    apt-get install -y file make autoconf automake build-essential python-dev libtool pkg-config libssl-dev g++ zlib1g-dev vim
+    apt-get install -y curl file make autoconf automake build-essential python-dev libtool pkg-config libssl-dev g++ zlib1g-dev vim gpg
 
 RUN    mkdir -p ${ANDROID_HOME} \
     && wget --quiet --output-document=${ANDROID_HOME}/android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS_REV}.zip \
@@ -54,8 +54,15 @@ RUN git clone https://github.com/facebook/watchman.git && \
     make install && \
     cd
 
-RUN apt-get install -y ruby-full  && \
-    gem install nokogiri && \
+RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import - && \
+    curl -sSL https://rvm.io/pkuczynski.asc | gpg --import - && \
+    curl -sSL https://get.rvm.io | bash -s stable && \
+    source /etc/profile.d/rvm.sh && \
+    rvm requirements && \
+    rvm install 2.6 && \
+    rvm use 2.6.3 --default 
+
+RUN gem install nokogiri && \
     gem install fastlane -NV
 
 RUN cd /tmp && \
