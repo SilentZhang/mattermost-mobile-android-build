@@ -54,15 +54,15 @@ RUN git clone https://github.com/facebook/watchman.git && \
     make install && \
     cd
 
-RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import - && \
-    curl -sSL https://rvm.io/pkuczynski.asc | gpg --import - && \
-    curl -sSL https://get.rvm.io | bash -s stable
+#RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import - && \
+#    curl -sSL https://rvm.io/pkuczynski.asc | gpg --import - && \
+#    curl -sSL https://get.rvm.io | bash -s stable
 
-RUN /bin/bash -c "source /etc/profile.d/rvm.sh"
+#RUN /bin/bash -c "source /etc/profile.d/rvm.sh"
 
-RUN rvm requirements && \
-    rvm install 2.6 && \
-    rvm use 2.6.3 --default 
+#RUN rvm requirements && \
+#    rvm install 2.6 && \
+#    rvm use 2.6.3 --default 
 
 RUN apt-get install -y ruby-full && \
     gem install nokogiri && \
