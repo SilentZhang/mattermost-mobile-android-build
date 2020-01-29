@@ -7,6 +7,9 @@ ENV ANDROID_COMPILE_SDK="27"        \
     ANDROID_SDK_TOOLS_REV="4333796" \
     ANDROID_CMAKE_REV="3.6.4111459" \
     ANDROID_CMAKE_REV_3_10="3.10.2.4988404"
+    
+ENV ANDROID_HOME=/opt/android-sdk-linux
+ENV PATH ${PATH}:${ANDROID_HOME}/platform-tools/:${ANDROID_NDK_HOME}:${ANDROID_HOME}/ndk-bundle:${ANDROID_HOME}/tools/bin/
 
 RUN apt-get update && \
     apt-get install -y file make autoconf automake build-essential python-dev libtool pkg-config libssl-dev g++ zlib1g-dev vim
