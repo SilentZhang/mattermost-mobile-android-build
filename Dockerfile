@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk
+FROM ubuntu:18.04
 
 MAINTAINER zhangchang<zhangchang1979@gmail.com>
 
@@ -12,7 +12,7 @@ ENV ANDROID_HOME=/opt/android-sdk-linux
 ENV PATH ${PATH}:${ANDROID_HOME}/platform-tools/:${ANDROID_NDK_HOME}:${ANDROID_HOME}/ndk-bundle:${ANDROID_HOME}/tools/bin/
 
 RUN apt-get update && \
-    apt-get install -y curl file make autoconf automake build-essential python-dev libtool pkg-config libssl-dev g++ zlib1g-dev vim gpg
+    apt-get install -y openjdk-8-jdk curl file make autoconf automake build-essential python-dev libtool pkg-config libssl-dev g++ zlib1g-dev vim gpg
 
 RUN    mkdir -p ${ANDROID_HOME} \
     && wget --quiet --output-document=${ANDROID_HOME}/android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS_REV}.zip \
@@ -64,7 +64,8 @@ RUN rvm requirements && \
     rvm install 2.6 && \
     rvm use 2.6.3 --default 
 
-RUN gem install nokogiri && \
+RUN apt-get install -y ruby-full && \
+    gem install nokogiri && \
     gem install fastlane -NV
 
 RUN cd /tmp && \
