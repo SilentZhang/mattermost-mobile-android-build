@@ -66,7 +66,8 @@ RUN git clone https://github.com/facebook/watchman.git && \
 
 RUN apt-get install -y ruby-full && \
     gem install nokogiri && \
-    gem install fastlane -NV
+    gem install fastlane -NV && \
+    gem update --system
 
 RUN cd /tmp && \
     wget https://raw.githubusercontent.com/mattermost/mattermost-mobile/master/fastlane/Gemfile -q && \
