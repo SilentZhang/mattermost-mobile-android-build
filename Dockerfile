@@ -30,6 +30,7 @@ RUN    yes | sdkmanager --licenses > /dev/null \
     && yes | sdkmanager 'platforms;android-28' \
     && yes | sdkmanager 'extras;android;m2repository' \
     && yes | sdkmanager 'extras;google;google_play_services' \
+    && yes | sdkmanager 'extras;m2repository' \
     && yes | sdkmanager 'extras;google;m2repository' 
 
 RUN    yes | sdkmanager 'cmake;'$ANDROID_CMAKE_REV \
