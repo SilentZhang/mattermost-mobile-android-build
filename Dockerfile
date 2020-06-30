@@ -22,9 +22,15 @@ RUN git clone https://github.com/facebook/watchman.git && \
     make && \
     make install && \
     cd
+    
+RUN curl -o- https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.1.tar.gz && \
+    tar zxvf ruby-2.7.1.tar.gz && \
+    cd ruby-2.7.1 && \
+    ./configure && \
+    make && \
+    make install 
 
-RUN apt-get install -y ruby-full  && \
-    gem install nokogiri && \
+RUN gem install nokogiri && \
     gem install -n /usr/local/bin fastlane -NV
 
 RUN cd /tmp && \
