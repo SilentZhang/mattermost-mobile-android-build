@@ -3,7 +3,7 @@ FROM npetrovsky/docker-android-sdk-ndk
 MAINTAINER zhangchang<zhangchang1979@gmail.com>
 
 RUN apt-get update && \
-    apt-get install -y make autoconf automake build-essential python-dev libtool pkg-config libssl-dev g++ zlib1g-dev vim
+    apt-get install -y make autoconf automake build-essential python-dev libtool pkg-config libssl-dev g++ zlib1g-dev vim wget
 
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash && \
@@ -23,7 +23,7 @@ RUN git clone https://github.com/facebook/watchman.git && \
     make install && \
     cd
     
-RUN curl -o- https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.1.tar.gz && \
+RUN wget https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.1.tar.gz && \
     tar zxvf ruby-2.7.1.tar.gz && \
     cd ruby-2.7.1 && \
     ./configure && \
