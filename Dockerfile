@@ -28,7 +28,8 @@ RUN curl -o- https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.1.tar.gz && \
     cd ruby-2.7.1 && \
     ./configure && \
     make && \
-    make install 
+    make install && \
+    cd
 
 RUN gem install nokogiri && \
     gem install -n /usr/local/bin fastlane -NV
