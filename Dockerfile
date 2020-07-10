@@ -12,7 +12,7 @@ ENV ANDROID_HOME=/opt/android-sdk-linux
 ENV PATH ${PATH}:${ANDROID_HOME}/platform-tools/:${ANDROID_NDK_HOME}:${ANDROID_HOME}/ndk-bundle:${ANDROID_HOME}/tools/bin/
 
 RUN apt-get update && \
-    apt-get install -y openjdk-8-jdk curl wget git unzip file make autoconf automake build-essential python-dev libtool pkg-config libssl-dev g++ zlib1g-dev vim gpg
+    apt-get install -y openjdk-8-jdk curl wget git unzip file make autoconf automake build-essential python-dev libtool pkg-config libssl-dev g++ zlib1g-dev gpg locales ruby-full 
 
 RUN    mkdir -p ${ANDROID_HOME} \
     && wget --quiet --output-document=${ANDROID_HOME}/android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS_REV}.zip \
@@ -55,18 +55,8 @@ RUN git clone https://github.com/facebook/watchman.git && \
     make install && \
     cd
 
-#RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import - && \
-#    curl -sSL https://rvm.io/pkuczynski.asc | gpg --import - && \
-#    curl -sSL https://get.rvm.io | bash -s stable
 
-#RUN /bin/bash -c "source /etc/profile.d/rvm.sh"
-
-#RUN rvm requirements && \
-#    rvm install 2.6 && \
-#    rvm use 2.6.3 --default 
-
-RUN apt-get install -y ruby-full && \
-    gem install nokogiri && \
+RUN gem install nokogiri && \
     gem install fastlane -NV && \
     gem update --system
 
@@ -82,8 +72,6 @@ RUN /usr/lib/jvm/java-8-openjdk-amd64/bin/keytool  -genkey -v -keystore ~/tci-ma
     echo "MATTERMOST_RELEASE_KEY_ALIAS=tci-mattermost" >> ~/.gradle/gradle.properties && \
     echo "MATTERMOST_RELEASE_PASSWORD=123456" >> ~/.gradle/gradle.properties
 
-RUN apt-get update && \
-    apt-get install -y locales && \
-    rm -rf /var/lib/apt/lists/* && \
-	localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+RUN rm -rf /var/lib/apt/lists/* && \
+    localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.UTF-8
